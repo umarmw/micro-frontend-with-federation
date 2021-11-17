@@ -1,0 +1,9 @@
+{
+  "useWorkspaces": true,
+  "packages": [
+    "root",
+    "home",
+    "project"
+  ],
+  "version": "0.0.0"
+}

@@ -1,0 +1,36 @@
+{
+  "name": "micro-frontend-with-federation",
+  "version": "1.0.0",
+  "description": "micro frontend with webpack 5 and lerna",
+  "main": "index.js",
+  "workspaces": {
+    "packages": [
+      "root",
+      "home",
+      "project"
+    ]
+  },
+  "scripts": {
+    "start": "lerna run --parallel start",
+    "build": "lerna run build",
+    "serve": "lerna run --parallel serve",
+    "clean": "lerna run --parallel clean"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umarmw/micro-frontend-with-federation.git"
+  },
+  "keywords": [
+    "micro",
+    "frontend"
+  ],
+  "author": "Umar Waliyullah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/umarmw/micro-frontend-with-federation/issues"
+  },
+  "homepage": "https://github.com/umarmw/micro-frontend-with-federation#readme",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
