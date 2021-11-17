@@ -1,16 +1,20 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { createBrowserHistory } from "history";
+
 import Loader from "./components/Loader.js";
 
 const HOME = React.lazy(() => import("homeApp/app"));
 const PROJECT = React.lazy(() => import("projectApp/app"));
 
-function App() {
+const defaultHistory = createBrowserHistory();
+
+function App({ history = defaultHistory }) {
   return (
     <div className="App">
       <React.Suspense fallback={<Loader />}>
-      <BrowserRouter>
+      <BrowserRouter history={history}>
         <nav>
           <ul>
             <li>
