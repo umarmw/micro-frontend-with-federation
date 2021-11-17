@@ -1,14 +1,32 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
 function App() {
+
+  const searchRef = React.useRef();
+  const [searchTerm, setSearchTerm] = React.useState("");
+
+  function getSearchTerm() {
+    setSearchTerm(searchRef.current.value);
+    localStorage.setItem("searchTerm", searchRef.current.value);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Home App
         </p>
+
+        <div className="search">
+          <input type="text" name="search" className="search-input" ref={searchRef}/>
+          <button onClick={getSearchTerm}>Search</button>
+        </div>
+
+        <div>
+        {searchTerm && <p>You have searched for <b>{searchTerm}!</b></p>}
+        </div>
+
       </header>
     </div>
   );
