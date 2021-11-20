@@ -1,12 +1,24 @@
+import { Observable } from 'windowed-observable';
 import React, {useEffect} from 'react';
 import './App.css';
 
-function App() {
-  const [searchTerm, setSearchTerm] = React.useState("");
+const observable = new Observable('messages');
 
-  useEffect(() => {
-    setSearchTerm(localStorage.getItem("searchTerm"))
-  }, [searchTerm]);
+function App() {
+  const [searchTerm, setSearchTerm] = React.useState([]);
+
+  const handleNewMessage = (newMessage) => {
+    console.log("newMessage", newMessage);
+    setSearchTerm((currentMessages) => currentMessages.concat(newMessage));
+  };
+
+  useEffect(() => {  
+    observable.subscribe(handleNewMessage);
+
+    return () => {
+      observable.unsubscribe(handleNewMessage)
+    }
+  }, [handleNewMessage]);
 
   return (
     <div className="App">
@@ -17,7 +29,7 @@ function App() {
 
 
         <div>
-        {searchTerm && <p>You have previously searched for <b>{searchTerm}!</b></p>}
+        {searchTerm && <p>You have previously searched for <b>{JSON.stringify(searchTerm)}!</b></p>}
         </div>
 
       </header>

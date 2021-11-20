@@ -1,5 +1,8 @@
 import React from 'react';
+import { Observable } from 'windowed-observable';
 import './App.css';
+
+const observable = new Observable('messages');
 
 function App() {
 
@@ -8,7 +11,7 @@ function App() {
 
   function getSearchTerm() {
     setSearchTerm(searchRef.current.value);
-    localStorage.setItem("searchTerm", searchRef.current.value);
+    observable.publish(searchRef.current.value);
   }
 
   return (
