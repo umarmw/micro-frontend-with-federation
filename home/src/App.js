@@ -6,9 +6,14 @@ function App() {
   const searchRef = React.useRef();
   const [searchTerm, setSearchTerm] = React.useState("");
 
+
   function getSearchTerm() {
     setSearchTerm(searchRef.current.value);
-    localStorage.setItem("searchTerm", searchRef.current.value);
+
+    const customEvent = new CustomEvent('message', { detail: searchRef.current.value});
+    window.dispatchEvent(customEvent)
+    
+    // localStorage.setItem("searchTerm", searchRef.current.value);
   }
 
   return (

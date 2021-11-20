@@ -2,11 +2,26 @@ import React, {useEffect} from 'react';
 import './App.css';
 
 function App() {
-  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchTerm, setSearchTerm] = React.useState([]);
+
+  // useEffect(() => {
+  //   setSearchTerm(localStorage.getItem("searchTerm"))
+  // }, [searchTerm]);
+
+  const handleNewMessage = (event) => {
+    console.log("event", event)
+    setSearchTerm((currentMessages) => currentMessages.concat(event.detail));
+  };
 
   useEffect(() => {
-    setSearchTerm(localStorage.getItem("searchTerm"))
-  }, [searchTerm]);
+  
+    window.addEventListener('message', handleNewMessage);
+    
+    return () => {
+      window.removeEventListener('message', handleNewMessage);
+    }
+  },[handleNewMessage]);
+
 
   return (
     <div className="App">
